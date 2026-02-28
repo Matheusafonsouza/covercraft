@@ -1,40 +1,25 @@
 import React from "react";
 import PreviewCanvas from "../PreviewCanvas";
-import { CardData } from "@/lib/types";
+import { useBuilderContext } from "./BuilderContext";
 
-interface PreviewPanelProps {
-  data: CardData;
-  bg: string;
-  tc: string;
-  logoW: number;
-  logoH: number;
-  cardW: number;
-  cardH: number;
-  zoom: number;
-  previewScale: number;
-  previewHostRef: React.RefObject<HTMLDivElement>;
-  cardRef: React.RefObject<HTMLDivElement>;
-  onZoomOut: () => void;
-  onZoomIn: () => void;
-  onCardResize: (width: number, height: number) => void;
-}
+export default function PreviewPanel() {
+  const {
+    data,
+    bg,
+    tc,
+    logoW,
+    logoH,
+    cardW,
+    cardH,
+    zoom,
+    previewScale,
+    previewHostRef,
+    cardRef,
+    onZoomOut,
+    onZoomIn,
+    onCardResize,
+  } = useBuilderContext();
 
-export default function PreviewPanel({
-  data,
-  bg,
-  tc,
-  logoW,
-  logoH,
-  cardW,
-  cardH,
-  zoom,
-  previewScale,
-  previewHostRef,
-  cardRef,
-  onZoomOut,
-  onZoomIn,
-  onCardResize,
-}: PreviewPanelProps) {
   return (
     <main className="order-3 lg:order-none flex-1 overflow-hidden bg-[#060609] px-4 lg:px-8 pt-4 lg:pt-6 pb-4 lg:pb-6 min-h-[50vh] lg:min-h-0">
       <div className="h-full flex flex-col">

@@ -41,7 +41,7 @@ export default function CoverLetterCard({
     .map((p) => p.trim())
     .filter(Boolean);
 
-  const onCardHandleDown = (e: React.MouseEvent) => {
+  const onCardHandleDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const sw = cardW,
       sh = cardH;
     startDrag(e, (cx, cy) => {
@@ -89,7 +89,7 @@ export default function CoverLetterCard({
       </div>
 
       {/* ── Resize handle (edit mode only) ── */}
-      {handles && <ResizeHandle onMouseDown={onCardHandleDown} />}
+      {handles && <ResizeHandle onPointerDown={onCardHandleDown} />}
     </div>
   );
 }

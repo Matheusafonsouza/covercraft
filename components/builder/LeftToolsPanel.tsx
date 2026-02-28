@@ -1,70 +1,43 @@
 import React from "react";
 import Slider from "../Slider";
 import SectionCard from "../SectionCard";
-import FieldLabel from "../FieldLabel";
+import { useBuilderContext } from "./BuilderContext";
+import AccordionSection from "./AccordionSection";
+import { LEFT_ACCORDION_HEIGHTS } from "./config";
 
-type LeftSectionKey = "logo" | "background" | "canvas";
+export default function LeftToolsPanel() {
+  const {
+    mobileSectionsOpen,
+    onToggleSection,
+    logoSrc,
+    extracting,
+    bg,
+    tc,
+    logoH,
+    cardW,
+    cardH,
+    fileRef,
+    onHandleLogo,
+    onClearLogo,
+    onSetLogoByH,
+    onApplyBg,
+    onToggleTextColor,
+    onSetCardSize,
+    onSetCardW,
+    onSetCardH,
+    inputCls,
+    presets,
+  } = useBuilderContext();
 
-interface LeftToolsPanelProps {
-  mobileSectionsOpen: Record<LeftSectionKey, boolean>;
-  onToggleSection: (key: LeftSectionKey) => void;
-  logoSrc: string | null;
-  extracting: boolean;
-  bg: string;
-  tc: "#ffffff" | "#111111";
-  logoH: number;
-  cardW: number;
-  cardH: number;
-  fileRef: React.RefObject<HTMLInputElement>;
-  onHandleLogo: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClearLogo: () => void;
-  onSetLogoByH: (value: number) => void;
-  onApplyBg: (hex: string) => void;
-  onToggleTextColor: () => void;
-  onSetCardSize: (width: number, height: number) => void;
-  onSetCardW: (value: number) => void;
-  onSetCardH: (value: number) => void;
-  inputCls: string;
-  presets: [string, number, number][];
-}
-
-export default function LeftToolsPanel({
-  mobileSectionsOpen,
-  onToggleSection,
-  logoSrc,
-  extracting,
-  bg,
-  tc,
-  logoH,
-  cardW,
-  cardH,
-  fileRef,
-  onHandleLogo,
-  onClearLogo,
-  onSetLogoByH,
-  onApplyBg,
-  onToggleTextColor,
-  onSetCardSize,
-  onSetCardW,
-  onSetCardH,
-  inputCls,
-  presets,
-}: LeftToolsPanelProps) {
   return (
     <aside className="order-1 w-full lg:order-none lg:w-[300px] shrink-0 overflow-visible lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-canvas-border p-4">
       <SectionCard>
-        <div className="flex items-center justify-between mb-2.5">
-          <FieldLabel>Company Logo</FieldLabel>
-          <button
-            onClick={() => onToggleSection("logo")}
-            className="lg:hidden w-6 h-6 rounded-md border border-canvas-stroke text-ink-muted text-sm cursor-pointer"
-            aria-label="Toggle company logo section"
-          >
-            {mobileSectionsOpen.logo ? "−" : "+"}
-          </button>
-        </div>
-        <div
-          className={`overflow-hidden transition-all duration-300 ${mobileSectionsOpen.logo ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0"} lg:max-h-none lg:opacity-100`}
+        <AccordionSection
+          title="Company Logo"
+          open={mobileSectionsOpen.logo}
+          maxHeightClass={LEFT_ACCORDION_HEIGHTS.logo}
+          onToggle={() => onToggleSection("logo")}
+          toggleAriaLabel="Toggle company logo section"
         >
           {logoSrc ? (
             <>
@@ -123,22 +96,16 @@ export default function LeftToolsPanel({
               />
             </label>
           )}
-        </div>
+        </AccordionSection>
       </SectionCard>
 
       <SectionCard>
-        <div className="flex items-center justify-between mb-2.5">
-          <FieldLabel>Background Color</FieldLabel>
-          <button
-            onClick={() => onToggleSection("background")}
-            className="lg:hidden w-6 h-6 rounded-md border border-canvas-stroke text-ink-muted text-sm cursor-pointer"
-            aria-label="Toggle background color section"
-          >
-            {mobileSectionsOpen.background ? "−" : "+"}
-          </button>
-        </div>
-        <div
-          className={`overflow-hidden transition-all duration-300 ${mobileSectionsOpen.background ? "max-h-[260px] opacity-100" : "max-h-0 opacity-0"} lg:max-h-none lg:opacity-100`}
+        <AccordionSection
+          title="Background Color"
+          open={mobileSectionsOpen.background}
+          maxHeightClass={LEFT_ACCORDION_HEIGHTS.background}
+          onToggle={() => onToggleSection("background")}
+          toggleAriaLabel="Toggle background color section"
         >
           <div className="flex gap-2 items-center">
             <input
@@ -162,28 +129,21 @@ export default function LeftToolsPanel({
               {tc === "#ffffff" ? "☀ Dark" : "☾ Light"}
             </button>
           </div>
-        </div>
+        </AccordionSection>
       </SectionCard>
 
       <SectionCard>
-        <div className="flex justify-between items-center mb-2.5">
-          <FieldLabel>Canvas Size</FieldLabel>
-          <div className="flex items-center gap-2">
+        <AccordionSection
+          title="Canvas Size"
+          open={mobileSectionsOpen.canvas}
+          maxHeightClass={LEFT_ACCORDION_HEIGHTS.canvas}
+          onToggle={() => onToggleSection("canvas")}
+          toggleAriaLabel="Toggle canvas size section"
+          right={
             <span className="text-[10px] text-ink-muted font-mono">
               {cardW}×{cardH}
             </span>
-            <button
-              onClick={() => onToggleSection("canvas")}
-              className="lg:hidden w-6 h-6 rounded-md border border-canvas-stroke text-ink-muted text-sm cursor-pointer"
-              aria-label="Toggle canvas size section"
-            >
-              {mobileSectionsOpen.canvas ? "−" : "+"}
-            </button>
-          </div>
-        </div>
-
-        <div
-          className={`overflow-hidden transition-all duration-300 ${mobileSectionsOpen.canvas ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"} lg:max-h-none lg:opacity-100`}
+          }
         >
           <div className="flex gap-1.5 mb-3">
             {presets.map(([name, width, height]) => (
@@ -226,7 +186,7 @@ export default function LeftToolsPanel({
             Also drag the <strong className="text-ink-dim">↘ grip</strong> on
             the card corner (Edit mode).
           </p>
-        </div>
+        </AccordionSection>
       </SectionCard>
     </aside>
   );

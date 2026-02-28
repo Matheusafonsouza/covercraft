@@ -8,7 +8,13 @@ interface LogoBlockProps {
   s: number;
 }
 
-export default function LogoBlock({ logoSrc, logoW, logoH, tc, s }: LogoBlockProps) {
+export default function LogoBlock({
+  logoSrc,
+  logoW,
+  logoH,
+  tc,
+  s,
+}: LogoBlockProps) {
   return (
     <div
       style={{

@@ -2,13 +2,13 @@ import React from "react";
 import Grip from "./Grip";
 
 interface ResizeHandleProps {
-  onMouseDown: (event: React.MouseEvent) => void;
+  onPointerDown: (event: React.PointerEvent<HTMLDivElement>) => void;
 }
 
-export default function ResizeHandle({ onMouseDown }: ResizeHandleProps) {
+export default function ResizeHandle({ onPointerDown }: ResizeHandleProps) {
   return (
     <div
-      onMouseDown={onMouseDown}
+      onPointerDown={onPointerDown}
       title="Drag to resize card"
       style={{
         position: "absolute",
@@ -23,6 +23,7 @@ export default function ResizeHandle({ onMouseDown }: ResizeHandleProps) {
         alignItems: "center",
         justifyContent: "center",
         zIndex: 20,
+        touchAction: "none",
       }}
     >
       <Grip size={14} />
