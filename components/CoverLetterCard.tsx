@@ -128,7 +128,16 @@ export default function CoverLetterCard({
               </p>
             ))
           ) : (
-            <p style={{ fontSize: Math.round(13 * s), opacity: 0.25, fontStyle: "italic", color: tc }}>
+            <p
+              style={{
+                fontSize: Math.round(13 * s),
+                lineHeight: 1.6,
+                margin: 0,
+                opacity: 0.25,
+                fontStyle: "italic",
+                color: tc,
+              }}
+            >
               Your cover letter text will appear here…
             </p>
           )}
