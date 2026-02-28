@@ -192,7 +192,8 @@ export default function LeftToolsPanel({
                 onClick={() => onSetCardSize(width, height)}
                 className="flex-1 py-1 text-[10px] font-semibold rounded cursor-pointer transition-all border"
                 style={{
-                  borderColor: cardW === width && cardH === height ? bg : "#2a2a36",
+                  borderColor:
+                    cardW === width && cardH === height ? bg : "#2a2a36",
                   background:
                     cardW === width && cardH === height ? bg + "22" : "#1a1a22",
                   color:
@@ -222,8 +223,8 @@ export default function LeftToolsPanel({
           />
 
           <p className="text-[10px] text-ink-ghost leading-relaxed mt-1">
-            Also drag the <strong className="text-ink-dim">↘ grip</strong> on the
-            card corner (Edit mode).
+            Also drag the <strong className="text-ink-dim">↘ grip</strong> on
+            the card corner (Edit mode).
           </p>
         </div>
       </SectionCard>

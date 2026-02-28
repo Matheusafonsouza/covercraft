@@ -53,7 +53,7 @@ export default function FooterBlock({ data, tc, s }: FooterBlockProps) {
             {data.email || "email@example.com"}
           </p>
         </div>
-        <div style={{ textAlign: "right" }}>
+        <div className="text-right">
           {data.phone && (
             <p
               style={{

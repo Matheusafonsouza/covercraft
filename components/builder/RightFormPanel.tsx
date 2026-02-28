@@ -16,7 +16,9 @@ interface RightFormPanelProps {
   onDownload: () => void;
   onSetField: (
     name: keyof FormData,
-  ) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  ) => (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
 }
 
 export default function RightFormPanel({

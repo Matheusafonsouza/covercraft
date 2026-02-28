@@ -7,7 +7,12 @@ interface BodyBlockProps {
   s: number;
 }
 
-export default function BodyBlock({ title, paragraphs, tc, s }: BodyBlockProps) {
+export default function BodyBlock({
+  title,
+  paragraphs,
+  tc,
+  s,
+}: BodyBlockProps) {
   return (
     <>
       <h1
