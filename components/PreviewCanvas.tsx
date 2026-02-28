@@ -24,13 +24,24 @@ interface Props {
 export { SCALE };
 
 export default function PreviewCanvas({
-  data, bg, tc, logoW, logoH, cardW, cardH, scale = SCALE, onCardResize, handles, forwardedRef,
+  data,
+  bg,
+  tc,
+  logoW,
+  logoH,
+  cardW,
+  cardH,
+  scale = SCALE,
+  onCardResize,
+  handles,
+  forwardedRef,
 }: Props) {
   const visW = Math.round(cardW * scale);
   const visH = Math.round(cardH * scale);
 
   const onOuterHandleDown = (e: React.MouseEvent) => {
-    const sw = cardW, sh = cardH;
+    const sw = cardW,
+      sh = cardH;
     startDrag(e, (cx, cy) => {
       const dx = (cx - e.clientX) / scale;
       const dy = (cy - e.clientY) / scale;
@@ -39,15 +50,35 @@ export default function PreviewCanvas({
   };
 
   return (
-    <div style={{ position: "relative", display: "inline-block", lineHeight: 0 }}>
+    <div
+      style={{ position: "relative", display: "inline-block", lineHeight: 0 }}
+    >
       {/* Clip box at visual (scaled) dimensions */}
-      <div style={{ width: visW, height: visH, overflow: "hidden", position: "relative" }}>
+      <div
+        style={{
+          width: visW,
+          height: visH,
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
         {/* Scale transform */}
-        <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", width: cardW, height: cardH }}>
+        <div
+          style={{
+            transform: `scale(${scale})`,
+            transformOrigin: "top left",
+            width: cardW,
+            height: cardH,
+          }}
+        >
           <CoverLetterCard
-            data={data} bg={bg} tc={tc}
-            logoW={logoW} logoH={logoH}
-            cardW={cardW} cardH={cardH}
+            data={data}
+            bg={bg}
+            tc={tc}
+            logoW={logoW}
+            logoH={logoH}
+            cardW={cardW}
+            cardH={cardH}
             onCardResize={onCardResize}
             handles={false} // inner handles disabled — use outer handle below
             forwardedRef={forwardedRef}
@@ -64,8 +95,23 @@ export default function PreviewCanvas({
             className="absolute bottom-0 right-0 w-7 h-7 cursor-nwse-resize bg-black/60 rounded-tl flex items-center justify-center z-20"
           >
             <svg width="14" height="14" viewBox="0 0 12 12">
-              {([[4,8],[8,4],[8,8],[12,4],[12,8],[12,12]] as [number,number][]).map(([cx, cy], i) => (
-                <circle key={i} cx={cx} cy={cy} r="1.5" fill="rgba(255,255,255,0.7)" />
+              {(
+                [
+                  [4, 8],
+                  [8, 4],
+                  [8, 8],
+                  [12, 4],
+                  [12, 8],
+                  [12, 12],
+                ] as [number, number][]
+              ).map(([cx, cy], i) => (
+                <circle
+                  key={i}
+                  cx={cx}
+                  cy={cy}
+                  r="1.5"
+                  fill="rgba(255,255,255,0.7)"
+                />
               ))}
             </svg>
           </div>

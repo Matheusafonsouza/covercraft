@@ -1,12 +1,15 @@
 export const toHex = (r: number, g: number, b: number): string =>
-  "#" + [r, g, b].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, "0")).join("");
+  "#" +
+  [r, g, b]
+    .map((v) => Math.min(255, Math.max(0, v)).toString(16).padStart(2, "0"))
+    .join("");
 
 export const getLum = (r: number, g: number, b: number): number =>
   0.299 * r + 0.587 * g + 0.114 * b;
 
 /** Extract dominant non-white/non-black color from an img element via canvas */
 export const extractDominantColor = (
-  imgEl: HTMLImageElement
+  imgEl: HTMLImageElement,
 ): { r: number; g: number; b: number } | null => {
   const canvas = document.createElement("canvas");
   canvas.width = 80;
@@ -20,7 +23,7 @@ export const extractDominantColor = (
   const freq: Record<string, number> = {};
   for (let i = 0; i < data.length; i += 4) {
     if (data[i + 3] < 128) continue; // transparent
-    const r = Math.round(data[i]     / 24) * 24;
+    const r = Math.round(data[i] / 24) * 24;
     const g = Math.round(data[i + 1] / 24) * 24;
     const b = Math.round(data[i + 2] / 24) * 24;
     const lum = getLum(r, g, b);
